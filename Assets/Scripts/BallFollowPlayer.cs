@@ -12,7 +12,10 @@ public class BallFollowPlayer : MonoBehaviour
     private Transform playerTransform;
 
     private const string PLAYER_TAG = "Player";
-
+    public void StartGame()
+    {
+        Debug.Log("START");
+    }
     void Start()
     {
         // Player est tag ?
