@@ -5,12 +5,14 @@ using UnityEngine;
 public class BallFollowPlayer : MonoBehaviour
 {
 
+    // ---- Définition de la variable vitesse
     public float speed = 0.02f;
-    public int minDistance = 0;
 
 
+    // ---- Je récupère les positions du player
     private Transform playerTransform;
 
+    // ---- Je recupère le Player grâce à son Tag
     private const string PLAYER_TAG = "Player";
     public void StartGame()
     {
@@ -18,9 +20,10 @@ public class BallFollowPlayer : MonoBehaviour
     }
     void Start()
     {
-        // Player est tag ?
+        // ---- Je cherche le player avec le tag player
         GameObject player = GameObject.FindGameObjectWithTag(PLAYER_TAG);
 
+        // ---- Si je trouve pas le tag player
         if (player != null)
         {
             playerTransform = player.transform;

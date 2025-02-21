@@ -1835,6 +1835,10 @@ PrefabInstance:
       value: Cube (17)
       objectReference: {fileID: 0}
     - target: {fileID: 6908789292718867449, guid: 01da5e656fcee414da5af4f1a3f79d03, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6908789292718867449, guid: 01da5e656fcee414da5af4f1a3f79d03, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.999999
       objectReference: {fileID: 0}
