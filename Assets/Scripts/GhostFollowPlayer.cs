@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GhostMovement2 : MonoBehaviour
+public class GhostFollowPlayer : MonoBehaviour
 {
     [SerializeField] private float speed = 2f;
     [SerializeField] private Transform[] patrolWaypoints;

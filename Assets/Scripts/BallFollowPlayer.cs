@@ -36,23 +36,4 @@ public class BallFollowPlayer : MonoBehaviour
         Vector3 direction = (playerTransform.position - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
     }
-
-    // Detection of a collision with the player
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(PLAYER_TAG))
-        {
-            HandlePlayerCollision();
-        }
-    }
-
-    // Removes health points from the player after collision
-    private void HandlePlayerCollision()
-    {
-        if (gameCondition != null)
-        {
-            gameCondition.TakeDamage(1);
-        }
-
-    }
 }
