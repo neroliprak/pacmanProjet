@@ -17,11 +17,13 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    // Increments the number of collected coins
     public void AddScore(int amount)
     {
         score += amount;
     }
 
+    // Returns the current score
     public int GetScore()
     {
         return score;

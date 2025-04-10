@@ -4,11 +4,12 @@ using System.Collections;
 
 public class PlateGiveSpeed : MonoBehaviour
 {
-    public float newSpeed = 8.0f;
-    public float speedDuration = 3.0f;
+    [SerializeField] private float boostSpeed = 8.0f;
+    [SerializeField] private float boostDuration = 3.0f;
 
     private const string PLAYER_TAG = "Player";
 
+    // In contact with the plate, gives speed to the player
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(PLAYER_TAG))
@@ -17,21 +18,23 @@ public class PlateGiveSpeed : MonoBehaviour
 
             if (controller != null)
             {
+                // Start the coroutine to apply the temporary speed
                 StartCoroutine(DurationSpeed(controller));
             }
         }
     }
 
+    // Coroutine, which modifies the player's speed for a specific period of time
     private IEnumerator DurationSpeed(FirstPersonController controller)
     {
         float originalSpeed = controller.MoveSpeed;
 
-        controller.MoveSpeed = newSpeed;
-        // Debug.Log("Vitesse " + newSpeed);
+        controller.MoveSpeed = boostSpeed;
 
-        yield return new WaitForSeconds(speedDuration);
+        // Wait for maximum speed duration
+        yield return new WaitForSeconds(boostDuration);
 
         controller.MoveSpeed = originalSpeed;
-        // Debug.Log("Vitesse" + originalSpeed);
+
     }
 }

@@ -4,51 +4,55 @@ using UnityEngine;
 
 public class BallFollowPlayer : MonoBehaviour
 {
+    [SerializeField] private float speed = 5f;
 
-    // ---- Définition de la variable vitesse
-    public float speed = 0.02f;
-
-
-    // ---- Je récupère les positions du player
+    // Reference to the GameCondition.cs class
+    private GameCondition gameCondition;
     private Transform playerTransform;
-
-    // ---- Je recupère le Player grâce à son Tag
     private const string PLAYER_TAG = "Player";
-    public void StartGame()
-    {
-        Debug.Log("START");
-    }
+
+    // Get position of player
     void Start()
     {
-        // ---- Je cherche le player avec le tag player
         GameObject player = GameObject.FindGameObjectWithTag(PLAYER_TAG);
-
-        // ---- Si je trouve pas le tag player
         if (player != null)
         {
             playerTransform = player.transform;
         }
-
+        gameCondition = FindObjectOfType<GameCondition>();
     }
 
     void Update()
     {
         if (playerTransform != null)
         {
-            float distance = Vector3.Distance(this.transform.position, playerTransform.position);
-
-            Vector3 direction = (playerTransform.position - this.transform.position);
-            this.transform.position += direction * speed * Time.deltaTime;
+            MoveTowardsPlayer();
         }
     }
 
+    // Move to the player's position with delays
+    private void MoveTowardsPlayer()
+    {
+        Vector3 direction = (playerTransform.position - transform.position).normalized;
+        transform.position += direction * speed * Time.deltaTime;
+    }
 
+    // Detection of a collision with the player
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == PLAYER_TAG)
+        if (other.CompareTag(PLAYER_TAG))
         {
-            Debug.Log("TOUCHER !");
+            HandlePlayerCollision();
         }
     }
 
+    // Removes health points from the player after collision
+    private void HandlePlayerCollision()
+    {
+        if (gameCondition != null)
+        {
+            gameCondition.TakeDamage(1);
+        }
+
+    }
 }

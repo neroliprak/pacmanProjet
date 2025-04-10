@@ -3,30 +3,29 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public float timers = 0f;
-    public Text timerText;
+    [SerializeField] private float timers = 0f;
+    [SerializeField] private Text timerText;
 
     void Start()
     {
         timers = 0;
-        UpdateTimerUI();
+        UpdateTimerText();
     }
 
+    // Per frame to update the timer
     void Update()
     {
         timers += Time.deltaTime;
-        UpdateTimerUI();
+        UpdateTimerText();
     }
 
-    private void UpdateTimerUI()
+    // Update the timer text in UI
+    private void UpdateTimerText()
     {
         if (timerText != null)
         {
+            // Formatted time value
             timerText.text = "Temps : " + timers.ToString("F2") + "s";
-        }
-        else
-        {
-            Debug.LogWarning("");
         }
     }
 }

@@ -12,20 +12,20 @@ public class Door : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    // Open the door if the player enters
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(PLAYER_TAG))
         {
-            Debug.Log("Ouverture de la porte");
             animator.SetBool("isOpen", true);
         }
     }
 
+    // Close the door if the player exits
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(PLAYER_TAG))
         {
-            Debug.Log("Fermeture de la porte");
             animator.SetBool("isOpen", false);
         }
     }

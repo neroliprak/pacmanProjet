@@ -1,20 +1,52 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DropMoney : MonoBehaviour
 {
     private const string PLAYER_TAG = "Player";
-    public int money = 1;
+    [SerializeField] private int money = 1;
+    [SerializeField] private Text scoreText;
 
+    // Reference to the GameCondition.cs class
+    private GameCondition gameCondition;
+
+    private void Start()
+    {
+        gameCondition = FindObjectOfType<GameCondition>();
+    }
+
+    // The player gets a coin
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(PLAYER_TAG))
+        if (other.CompareTag(PLAYER_TAG))
         {
+            HandleMoney();
+        }
+    }
 
-            ScoreManager.Instance.AddScore(money);
+    // Handles the money collection events
+    private void HandleMoney()
+    {
 
-            gameObject.SetActive(false);
+        // Adds score to the previous score
+        ScoreManager.Instance.AddScore(money);
+        // Disables the money object
+        gameObject.SetActive(false);
 
-            Debug.Log("Score actuel : " + ScoreManager.Instance.GetScore());
+        UpdateScoreText();
+        if (gameCondition != null)
+        {
+            // Checks if the player has collected all coins
+            gameCondition.CollectCoin();
+        }
+    }
+
+    // Update the score in Canva
+    void UpdateScoreText()
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + ScoreManager.Instance.GetScore();
         }
     }
 }
